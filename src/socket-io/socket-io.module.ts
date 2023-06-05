@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
-import { SocketIoController } from './socket-io.controller';
 import { SocketIoService } from './socket-io.service';
 import { SocketIoGateway } from './socket-io.gateway';
+import { SocketIoController } from './socket-io.controller';
 
 @Module({
     controllers: [SocketIoController],

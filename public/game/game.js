@@ -11,16 +11,16 @@ class socketIODto{
   }
 }
 
-const socket = io("http://localhost:3000/chat");
+const socket = io("http://localhost:3000/game");
         
 const message = document.getElementById('message');
 const messages = document.getElementById('messages');
 
-const handleSendMSG = () => {
-  socket.emit('message', { message: message.value, test: "test" })
+const handleSendGameMSG = () => {
+  socket.emit('message-games', { message: message.value, test: "test" })
 };
 
-socket.on('message', ( data ) => {
+socket.on('message-games', ( data ) => {
   console.log(data);
   handleNewMessage(data);
 });

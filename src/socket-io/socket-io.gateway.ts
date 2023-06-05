@@ -1,22 +1,17 @@
 import { SubscribeMessage, WebSocketGateway, WebSocketServer } from '@nestjs/websockets';
 import { Namespace } from 'socket.io';
 import { SocketIoDto } from './dto/socket-io.dto';
+import { Socket } from 'dgram';
 
-@WebSocketGateway()
+@WebSocketGateway({namespace: 'chat'})
 // implements OnGatewayInit, OnGatewayConnection, OnGatewayDisconnect
 export class SocketIoGateway {
 
   @WebSocketServer() server: Namespace;
 
-  @SubscribeMessage('send-test')
-  sendTest(client: any, payload: any): string{
-    console.log(client, payload);
-    this.server.emit('send-test', payload);
-    return ("send test");
-  }
-
   @SubscribeMessage('message')
-  handleMessage(client: any, payload: SocketIoDto){
+  handleMessage(client: Socket, payload: SocketIoDto){
+	console.log(client["id"]);
     this.server.emit('message', payload);
   }
 }
